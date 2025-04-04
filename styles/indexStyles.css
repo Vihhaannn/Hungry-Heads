@@ -1,0 +1,34 @@
+body {
+    background: url('../assets/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    text-align: center;
+    min-height: 90vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .hero {
+    margin-top: 100px;
+    padding-bottom: 50px; /* Added padding to ensure content doesn't get cut off */
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  
+  .reserve-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 15px 30px;
+    background: #FF7F50;
+    color: white;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+  
+  .reserve-btn:hover {
+    background: #ff4500;
+  }

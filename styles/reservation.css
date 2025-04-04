@@ -1,0 +1,82 @@
+body {
+    background: url('../assets/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    text-align: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.reservation-container {
+    max-width: 700px;
+    margin: 100px auto 50px;
+    /* Added bottom margin */
+    padding: 2.5rem;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.9);
+}
+
+h1 {
+    color: #f4c542;
+    font-size: 2.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input,
+select {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.seating-options {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.seating-options label {
+    margin-top: 0;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: linear-gradient(45deg, #f4c542, #ff8c00);
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(45deg, #ff8c00, #f4c542);
+}
+
+.hidden {
+    display: none;
+}
+
+#confirmationMessage {
+    color: #f4c542;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    font-weight: bold;
+}

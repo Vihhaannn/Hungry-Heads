@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Reservation</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/reservation.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">The Hungry Heads</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="delivery.html">Delivery</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="reservation.html">Reservation</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="reservation-container">
+        <h1>Make a Reservation</h1>
+        <form id="reservationForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="contact">Contact Number:</label>
+            <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" required>
+            <label for="members">Number of Guests:</label>
+            <input type="number" id="members" name="members" min="1" max="20" required>
+            <label for="food">Food Preferences:</label>
+            <select id="food" name="food" required>
+                <option value="veg">Vegetarian</option>
+                <option value="non-veg">Non-Vegetarian</option>
+            </select>
+            <label>Seating Preference:</label>
+            <div class="seating-options">
+                <label><input type="radio" name="seating" value="Indoor" required> Indoor</label>
+                <label><input type="radio" name="seating" value="Outdoor"> Outdoor</label>
+                <label><input type="radio" name="seating" value="Window View"> Window View</label>
+            </div>
+            <button type="submit" class="submit-btn">Reserve Now</button>
+        </form>
+        <p id="confirmationMessage" class="hidden">🎉 Reservation successful! 🎉</p>
+    </div>
+    <script>
+        const form = document.getElementById('reservationForm');
+        const confirmationMessage = document.getElementById('confirmationMessage');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                contact: document.getElementById('contact').value,
+                members: document.getElementById('members').value,
+                food: document.getElementById('food').value,
+                seating: document.querySelector('input[name="seating"]:checked').value
+            };
+
+            // Add this before form submission
+            if (!formData.contact.match(/^\d{10}$/)) {
+                alert("Please enter a valid 10-digit phone number");
+                return;
+            }
+
+            if (formData.members < 1 || formData.members > 20) {
+                alert("Number of guests must be between 1 and 20");
+                return;
+            }
+
+            // Send data to server
+            fetch('http://localhost:3000/api/reservations', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        confirmationMessage.textContent = "🎉 " + data.message + " 🎉";
+                        confirmationMessage.classList.remove('hidden');
+                        form.reset();
+
+                        setTimeout(() => {
+                            confirmationMessage.classList.add('hidden');
+                        }, 5000);
+                    } else {
+                        alert("Error: " + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("An error occurred while submitting your reservation.");
+                });
+        });
+    </script>
+</body>
+
+</html>

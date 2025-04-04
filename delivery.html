@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hungry Heads - Food Delivery</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/delivery.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">The Hungry Heads</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="delivery.html">Delivery</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="reservation.html">Reservation</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="delivery-container">
+        <h1>Order Your Favorite Food</h1>
+        <form id="orderForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="address">Delivery Address:</label>
+            <textarea id="address" name="address" required></textarea>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="foodOptions">Select Items:</label>
+            <div class="food-selection">
+                <select id="foodOptions">
+                    <option value="Pizza">Pizza</option>
+                    <option value="Burger">Burger</option>
+                    <option value="Pasta">Pasta</option>
+                    <option value="Salad">Salad</option>
+                    <option value="Sushi">Sushi</option>
+                </select>
+                <button type="button" id="addFoodItem">Add Item</button>
+            </div>
+
+            <div id="orderList"></div>
+            <input type="hidden" id="orderItems" name="orderItems" value="[]">
+
+            <label for="payment">Payment Method:</label>
+            <select id="payment" name="payment">
+                <option value="cash">Cash on Delivery</option>
+                <option value="card">Credit/Debit Card</option>
+                <option value="upi">UPI Payment</option>
+            </select>
+
+            <button type="submit" class="submit-btn">Place Order</button>
+        </form>
+        <p id="confirmationMessage" class="hidden">🎉 Order placed successfully! 🎉</p>
+    </div>
+
+    <script>
+        // Array to store order items
+        let orderItems = [];
+
+        // Add food item to order list
+        document.getElementById("addFoodItem").addEventListener("click", function () {
+            const selectedItem = document.getElementById("foodOptions").value;
+            const orderList = document.getElementById("orderList");
+
+            // Add to array
+            orderItems.push(selectedItem);
+
+            // Update hidden input
+            document.getElementById("orderItems").value = JSON.stringify(orderItems);
+
+            // Add to visual list
+            const listItem = document.createElement("div");
+            listItem.textContent = selectedItem;
+            orderList.appendChild(listItem);
+        });
+
+        // Form submission
+        const form = document.getElementById('orderForm');
+        const confirmationMessage = document.getElementById('confirmationMessage');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Check if order has items
+            if (orderItems.length === 0) {
+                alert("Please add at least one food item to your order.");
+                return;
+            }
+
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                address: document.getElementById('address').value,
+                phone: document.getElementById('phone').value,
+                payment: document.getElementById('payment').value,
+                orderItems: document.getElementById('orderItems').value
+            };
+
+            // Add this before form submission
+            if (!formData.phone.match(/^\d{10}$/)) {
+                alert("Please enter a valid 10-digit phone number");
+                return;
+            }
+
+            if (formData.address.length < 10) {
+                alert("Please enter a complete delivery address");
+                return;
+            }
+
+            // Send data to server
+            fetch('http://localhost:3000/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => Promise.reject(err));
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    confirmationMessage.textContent = "🎉 " + data.message + " 🎉";
+                    confirmationMessage.classList.remove('hidden');
+
+                    // Reset form and order items
+                    form.reset();
+                    orderItems = [];
+                    document.getElementById("orderItems").value = "[]";
+                    document.getElementById("orderList").innerHTML = "";
+
+                    setTimeout(() => {
+                        confirmationMessage.classList.add('hidden');
+                    }, 5000);
+                } else {
+                    alert("Error: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert(error.message || "An error occurred while submitting your order.");
+            });
+        });
+    </script>
+</body>
+
+</html>

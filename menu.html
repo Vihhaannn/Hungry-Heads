@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu & Reservation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+header {
+           position: fixed;
+           top: 0;
+           width: 100%;
+           background: rgba(0, 0, 0, 0.9);
+           box-shadow: 0 0 15px #FF7F50;
+           z-index: 1000;
+       }
+
+       nav {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           padding: 10px 20px;
+       }
+
+       .logo span {
+           font-size: 28px;
+           color: #FF7F50;
+           font-weight: bold;
+       }
+
+       nav ul {
+           list-style: none;
+           display: flex;
+           gap: 20px;
+       }
+
+       nav ul li a {
+           text-decoration: none;
+           color: white;
+       }
+
+       nav ul li a:hover {
+           color: #FF7F50;
+       }
+
+       .container {
+           max-width: 800px;
+           margin: auto;
+           background: rgba(0, 0, 0, 0.8);
+           padding: 20px;
+           border-radius: 10px;
+           box-shadow: 0 0 20px #FF7F50;
+       }
+
+       h1, h2 {
+           text-align: center;
+           color: #FF7F50;
+       }
+
+       label {
+           display: block;
+           margin-top: 10px;
+       }
+
+       input, textarea, select, button {
+           width: 100%;
+           padding: 10px;
+           margin-top: 5px;
+           border: none;
+           border-radius: 5px;
+       }
+
+       button {
+           background: linear-gradient(90deg, #FF7F50, #FF6347);
+           color: white;
+           font-size: 16px;
+           cursor: pointer;
+           transition: transform 0.3s;
+       }
+
+       button:hover {
+           transform: scale(1.1);
+           box-shadow: 0 0 12px #FF7F50;
+       }
+
+
+
+        body {
+            background: url('background.jpg') center/cover no-repeat, linear-gradient(to right, #2b5876, #4e4376);
+            color: #fff;
+            overflow-x: hidden;
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #ffcc00;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            animation: bounceIn 1.5s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .menu-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.2);
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.7);
+            z-index: 10;
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .menu-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .menu-info h3 {
+            font-size: 1.8rem;
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
+
+        .menu-info p {
+            font-size: 1rem;
+            margin: 5px 0;
+            color: #fff;
+        }
+
+        .menu-info span {
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+       <nav>
+           <div class="logo"><span>The Hungry Heads</span></div>
+           <ul>
+               <li><a href="homepage.html">Home</a></li>
+               <li><a href="menu.html">Menu</a></li>
+               <li><a href="delivery.html">Delivery</a></li>
+               <li><a href="news.html">Reviews</a></li>
+               <li><a href="reservation.html">Reservation</a></li>
+           </ul>
+       </nav>
+   </header>
+
+    <div class="container">
+        <h1>Our Menu</h1>
+        <div class="menu-container">
+            <div class="menu-item">
+                <img src="nachos.jpg" alt="Nachos">
+                <div class="menu-info">
+                    <h3>Masala Nachos</h3>
+                    <p>INR 140</p>
+                    <p>Chessy masala Nachos serverd with 2 different sauces.</p>
+                    <span>Category: Mains</span>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img src="pasta.jpg" alt="Pasta">
+                <div class="menu-info">
+                    <h3>Tandoori Spaghetti</h3>
+                    <p>INR 180</p>
+                    <p>Fresh vegetables tossed with spaghetti in a light creamy	 garlic sauce</p>
+                    <span>Category: Mains</span>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img src="boba.jpeg" alt="Boba">
+                <div class="menu-info">
+                    <h3>Boba Tea</h3>
+                    <p>INR 140</p>
+                    <p>Fresh Boba Tea, served with whipped cream</p>
+                    <span>Category: Drinks</span>
+                </div>
+            </div>
+
+            
+
+            <div class="menu-item">
+                <img src="kiwi.jpg" alt="Drinks">
+                <div class="menu-info">
+                    <h3>Kiwi and Lychee Mocktail</h3>
+                    <p>INR 90</p>
+                    <p>Chilled Virgin kiwi and Summer Lychee Mocktail, served with mint leaves and garnished with lemon</p>
+                    <span>Category: Drinks</span>
+                </div>
+            </div>
+
+	<div class="menu-item">
+                <img src="cake.jpg" alt="Bowl Cake">
+                <div class="menu-info">
+                    <h3>Bowl Cake</h3>
+                    <p>INR 200</p>
+                    <p>Warm chocolate cake with a gooey molten center, served with hot chocolates.</p>
+                    <span>Category: Desserts</span>
+                </div>
+            </div>
+
+                    </div>
+    </div>
+</body>
+</html>
+
+

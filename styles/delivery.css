@@ -1,0 +1,114 @@
+body {
+    background: url('../assets/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    text-align: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.delivery-container {
+    max-width: 700px;
+    margin: 100px auto 50px;
+    padding: 2.5rem;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.9);
+}
+
+h1 {
+    color: #f4c542;
+    font-size: 2.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.food-selection {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.food-selection select {
+    flex-grow: 1;
+}
+
+.food-selection button {
+    background: #FF7F50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.food-selection button:hover {
+    background: #ff4500;
+}
+
+#orderList {
+    margin: 10px 0;
+}
+
+#orderList div {
+    background: #333;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: linear-gradient(45deg, #f4c542, #ff8c00);
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(45deg, #ff8c00, #f4c542);
+}
+
+.hidden {
+    display: none;
+}
+
+#confirmationMessage {
+    color: #f4c542;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    font-weight: bold;
+}
